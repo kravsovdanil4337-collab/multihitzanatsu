@@ -1,0 +1,17 @@
+name: Build Mod
+on: [push]
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
+    - name: Build DLL
+      run: msbuild MultiHitZandatsu.csproj /p:Configuration=Release
+    - name: Upload Mod DLL
+      uses: actions/upload-artifact@v4
+      with:
+        name: MultiHitZandatsu-Mod
+        path: bin/Release/net472/MultiHitZandatsu.dll
+        
